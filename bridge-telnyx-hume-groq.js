@@ -417,6 +417,12 @@ server.on('request', (req, res) => {
     res.end('ok');
   }
 });
+server.on('request', (req, res) => {
+  if (req.url === '/' || req.url === '/health' || req.url === '/hc') {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('ok');
+  }
+});
 
   server.listen(PORT, '0.0.0.0', () => {
     console.log(`🌉 Bridge Service listening on port ${PORT}`);
