@@ -14,7 +14,6 @@
  * - Calls back to main server for TTS
  */
 
-require('dotenv').config();
 const WebSocket = require('ws');
 const { createServer } = require('http');
 const { WebSocketServer } = require('ws');
