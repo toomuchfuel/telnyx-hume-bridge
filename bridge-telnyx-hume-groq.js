@@ -410,6 +410,14 @@ function cleanupConnection(connectionId) {
  * Start the bridge server
  */
 function startServer() {
+  // --- add this before server.listen ---
+server.on('request', (req, res) => {
+  if (req.url === '/health') {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('ok');
+  }
+});
+
   server.listen(PORT, '0.0.0.0', () => {
     console.log(`🌉 Bridge Service listening on port ${PORT}`);
     console.log(`🔗 WebSocket endpoint: wss://localhost:${PORT}/telnyx`);
