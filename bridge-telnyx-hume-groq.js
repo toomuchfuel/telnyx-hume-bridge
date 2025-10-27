@@ -17,7 +17,6 @@
 const WebSocket = require('ws');
 const { createServer } = require('http');
 const { WebSocketServer } = require('ws');
-const axios = require('axios');
 
 // Environment variables validation
 const HUME_WS_URL = process.env.HUME_WS_URL;
