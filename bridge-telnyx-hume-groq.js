@@ -95,6 +95,13 @@ humeWs.on('close', (code, reason) => {
 // Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', port: PORT });
+  // Keep Railway alive
+setInterval(() => {
+  const http = require('http');
+  http.get(`http://localhost:${PORT}/health`, (res) => {
+    console.log(`Keep-alive ping: ${res.statusCode}`);
+  }).on('error', () => {});
+}, 60000); // Every 60s
 });
 
 console.log('Telnyx-Hume-Groq Bridge Ready');
