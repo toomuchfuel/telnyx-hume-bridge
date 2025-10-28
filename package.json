@@ -1,19 +1,13 @@
 {
   "name": "telnyx-hume-bridge",
   "version": "1.0.1",
-  "description": "Minimal Telnyx ⇄ Hume (Groq) WebSocket bridge",
   "main": "server.js",
-  "type": "commonjs",
   "scripts": {
     "start": "node server.js"
   },
-  "engines": {
-    "node": ">=18"
-  },
   "dependencies": {
-    "ws": "^8.17.0",
-    "node-fetch": "^2.6.7",
-    "dotenv": "^16.4.5",
-    "axios": "^1.7.7"
+    "express": "^4.18.2",
+    "ws": "^8.14.2",
+    "dotenv": "^16.3.1"
   }
 }
