@@ -35,13 +35,22 @@ wss.on('connection', (ws, req) => {
   }
 
   humeWs.on('open', () => {
-    console.log('Connected to Hume EVI');
-    // Optional: send session context
-    humeWs.send(JSON.stringify({
-      type: 'session.update',
-      session_id: sessionId
-    }));
-  });
+  console.log('Connected to Hume EVI');
+  // REQUIRED: Configure voice + model
+  humeWs.send(JSON.stringify({
+    type: 'session.update',
+    config: {
+      voice: {
+        provider: 'hume',
+        voice_id: 'australian-male-1'  // or your custom voice ID
+      },
+      model: {
+        provider: 'hume',
+        model: 'evi'
+      }
+    }
+  }));
+});
 
   humeWs.on('message', (data) => {
     // Forward Hume audio/output back to Telnyx
