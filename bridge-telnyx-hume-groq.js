@@ -34,19 +34,28 @@ wss.on('connection', (ws, req) => {
     return;
   }
 
-  humeWs.on('open', () => {
-  console.log('Connected to Hume EVI');
-  // REQUIRED: Configure voice + model
+  humeWs.on('error', (err) => {
+  console.error('Hume EVI WebSocket error:', err.message);
+});
+humeWs.on('close', (code, reason) => {
+  console.log(`Hume EVI closed: ${code} - ${reason}`);
+});
+  
+ humeWs.on('open', () => {
+  console.log('Connected to Hume EVI - sending session config');
   humeWs.send(JSON.stringify({
     type: 'session.update',
     config: {
       voice: {
         provider: 'hume',
-        voice_id: 'australian-male-1'  // or your custom voice ID
+        voice_id: 'australian-male-1'  // or your custom voice
       },
       model: {
         provider: 'hume',
         model: 'evi'
+      },
+      context: {
+        system_prompt: 'You are a compassionate AI therapist. Listen deeply, speak gently, focus on body sensations.'
       }
     }
   }));
