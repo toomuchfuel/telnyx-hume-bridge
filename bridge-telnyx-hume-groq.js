@@ -42,22 +42,18 @@ humeWs.on('close', (code, reason) => {
 });
   
  humeWs.on('open', () => {
-  console.log('Connected to Hume EVI - sending session config');
+  console.log('Connected to Hume EVI - sending session_settings');
   humeWs.send(JSON.stringify({
-    type: 'session.update',
-    config: {
-      voice: {
-        provider: 'hume',
-        voice_id: 'australian-male-1'  // or your custom voice
-      },
-      model: {
-        provider: 'hume',
-        model: 'evi'
-      },
-      context: {
-        system_prompt: 'You are a compassionate AI therapist. Listen deeply, speak gently, focus on body sensations.'
-      }
-    }
+    type: 'session_settings',
+    voice: {
+      provider: 'hume',
+      voice_id: 'australian-male-1'  // or your custom voice ID
+    },
+    model: {
+      provider: 'hume',
+      model: 'evi'
+    },
+    system_prompt: 'You are a compassionate AI therapist. Listen deeply, speak gently, focus on body sensations and breath.'
   }));
 });
 
